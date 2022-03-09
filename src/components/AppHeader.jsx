@@ -1,5 +1,6 @@
 import React from 'react';
 import Button, { SelectButton } from './Button';
+import ToDoModal from './ToDoModal';
 import styles from './../styles/modules/app.module.scss';
 
 export default function AppHeader() {
@@ -11,6 +12,7 @@ export default function AppHeader() {
 				<option value='incomplete'>Incomplete</option>
 				<option value='complete'>Completed</option>
 			</SelectButton>
+         <ToDoModal />
 		</div>
 	);
 }

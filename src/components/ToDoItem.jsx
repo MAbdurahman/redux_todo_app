@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
+import { deleteTodo } from './../redux/slices/todoSlice';
 import styles from './../styles/modules/todoItem.module.scss';
 import { getClasses } from './../utils/getClasses';
 import ToDoModal from './ToDoModal';
@@ -24,7 +25,8 @@ export default function ToDoItem({ todo }) {
    }
 
    const handleDelete = () => {
-      console.log('handleDelete')
+      dispatch(deleteTodo(todo.id));
+		toast.success('Successfully Deleted ToDo Item!');
    };
    const handleUpdate = () => {
       console.log('handleUpdate')

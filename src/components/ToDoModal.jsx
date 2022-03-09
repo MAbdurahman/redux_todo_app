@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { MdOutlineClose } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
-import { addTodo } from '../redux/slices/todoSlice';
 import { AnimatePresence, motion } from 'framer-motion';
 import toast from 'react-hot-toast';
+import { addTodo } from '../redux/slices/todoSlice';
 import styles from './../styles/modules/modal.module.scss';
 import Button from './Button';
 
@@ -12,7 +12,7 @@ export default function ToDoModal({ type, modalOpen, setModalOpen, todo }) {
 	//**************** variables ****************//
 	const [title, setTitle] = useState('');
 	const [status, setStatus] = useState('incomplete');
-	const dispatch = useDispatch;
+	const dispatch = useDispatch();
 
 	//**************** functions ****************//
 	const handleSubmit = e => {
@@ -32,9 +32,9 @@ export default function ToDoModal({ type, modalOpen, setModalOpen, todo }) {
 					})
 				);
 				toast.success('Successfully Added New Task!');
+				setModalOpen(false);
 			}
 
-			setModalOpen(false);
 		}
 		
 	}

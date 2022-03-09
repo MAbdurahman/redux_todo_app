@@ -6,7 +6,7 @@ export default function AppHeader() {
 	return (
 		<div className={styles.appHeader}>
 			<Button variant='primary'>Add Task</Button>
-			<SelectButton>
+			<SelectButton id='status'>
 				<option value='all'>All</option>
 				<option value='incomplete'>Incomplete</option>
 				<option value='complete'>Completed</option>

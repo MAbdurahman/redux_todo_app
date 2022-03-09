@@ -18,25 +18,58 @@ export default function ToDoItem({ todo }) {
    useEffect(() => {
       console.log('todo Item')
    }, []);
+
+   const handleChecked = () => {
+      console.log('handleChecked')
+   }
+
+   const handleDelete = () => {
+      console.log('handleDelete')
+   };
+   const handleUpdate = () => {
+      console.log('handleUpdate')
+   };
 	return (
-		<div className={styles.item}>
-			<div className={styles.todoDetails}>
-				[ ]
-				<div className={styles.texts}>
-					<p
-						className={getClasses([
-							styles.todoText,
-							todo.status === 'complete' &&
-								styles['todoText--completed'],
-						])}
+		<>
+			<div className={styles.item}>
+				<div className={styles.todoDetails}>
+					[ ]
+					<div className={styles.texts}>
+						<p
+							className={getClasses([
+								styles.todoText,
+								todo.status === 'complete' &&
+									styles['todoText--completed'],
+							])}
+						>
+							{todo.title}
+						</p>
+						<p className={styles.time}>
+							{format(new Date(todo.time), 'p, MM/dd/yyyy')}
+						</p>
+					</div>
+				</div>
+				<div className={styles.todoActions}>
+					<div
+						className={styles.icon}
+						onClick={() => handleUpdate()}
+						onKeyDown={() => handleUpdate()}
+						tabIndex={0}
+						role='button'
 					>
-						{todo.title}
-					</p>
-					<p className={styles.time}>
-						{format(new Date(todo.time), 'p, MM/dd/yyyy')}
-					</p>
+						<MdEdit />
+					</div>
+					<div
+						className={styles.icon}
+						onClick={() => handleDelete()}
+						onKeyDown={() => handleDelete()}
+						tabIndex={0}
+						role='button'
+					>
+						<MdDelete />
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }

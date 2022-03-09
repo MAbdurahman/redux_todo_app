@@ -16,21 +16,21 @@ export default function ToDoItem({ todo }) {
 	const [updateModalOpen, setUpdateModalOpen] = useState(false);
 
 	//**************** functions ****************//
-   useEffect(() => {
-      console.log('todo Item')
-   }, []);
+	useEffect(() => {
+		console.log('todo Item');
+	}, []);
 
-   const handleChecked = () => {
-      console.log('handleChecked')
-   }
+	const handleChecked = () => {
+		console.log('handleChecked');
+	};
 
-   const handleDelete = () => {
-      dispatch(deleteTodo(todo.id));
+	const handleDelete = () => {
+		dispatch(deleteTodo(todo.id));
 		toast.success('Successfully Deleted ToDo Item!');
-   };
-   const handleUpdate = () => {
-      console.log('handleUpdate')
-   };
+	};
+	const handleUpdate = () => {
+		setUpdateModalOpen(true);
+	};
 	return (
 		<>
 			<div className={styles.item}>
@@ -72,6 +72,12 @@ export default function ToDoItem({ todo }) {
 					</div>
 				</div>
 			</div>
+			<ToDoModal
+				type='update'
+				modalOpen={updateModalOpen}
+				setModalOpen={setUpdateModalOpen}
+				todo={todo}
+			/>
 		</>
 	);
 }

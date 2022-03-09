@@ -4,7 +4,7 @@ import { MdOutlineClose } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 import toast from 'react-hot-toast';
-import { addTodo } from '../redux/slices/todoSlice';
+import { addTodo, updateTodo } from '../redux/slices/todoSlice';
 import styles from './../styles/modules/modal.module.scss';
 import Button from './Button';
 
@@ -15,6 +15,15 @@ export default function ToDoModal({ type, modalOpen, setModalOpen, todo }) {
 	const dispatch = useDispatch();
 
 	//**************** functions ****************//
+	useEffect(() => {
+		if (type === 'update' && todo) {
+			setTitle(todo.title);
+			setStatus(todo.status);
+		} else {
+			setTitle('');
+			setStatus('incomplete');
+		}
+	}, [type, todo, modalOpen]);
 	const handleSubmit = e => {
 		e.preventDefault();
 		if (title === '') {
@@ -32,12 +41,19 @@ export default function ToDoModal({ type, modalOpen, setModalOpen, todo }) {
 					})
 				);
 				toast.success('Successfully Added New Task!');
-				setModalOpen(false);
 			}
-
+			if (type === 'update') {
+				if (todo.title !== title || todo.status !== status) {
+					dispatch(updateTodo({ ...todo, title, status }));
+					toast.success('Task Updated successfully');
+				} else {
+					toast.error('Click Cancel - No Update Performed!');
+					return;
+				}
+			}
+			setModalOpen(false);
 		}
-		
-	}
+	};
 	return (
 		<>
 			{modalOpen && (
@@ -53,7 +69,9 @@ export default function ToDoModal({ type, modalOpen, setModalOpen, todo }) {
 							<MdOutlineClose />
 						</div>
 						<form className={styles.form} onSubmit={e => handleSubmit(e)}>
-							<h1 className={styles.formTitle}>Add Task</h1>
+							<h1 className={styles.formTitle}>
+								{type === 'add' ? 'Add' : 'Update'} TODO
+							</h1>
 							<label htmlFor='title'>
 								Title
 								<input
@@ -76,8 +94,7 @@ export default function ToDoModal({ type, modalOpen, setModalOpen, todo }) {
 							</label>
 							<div className={styles.buttonContainer}>
 								<Button type='submit' variant='primary'>
-									{/* {type === 'add' ? 'Add Task' : 'Update Task'} */}
-									Add Task
+									{type === 'add' ? 'Add ToDo' : 'Update ToDo'}
 								</Button>
 								<Button
 									variant='secondary'

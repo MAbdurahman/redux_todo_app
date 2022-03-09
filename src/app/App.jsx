@@ -1,4 +1,5 @@
 import React from 'react';
+import { Toaster } from 'react-hot-toast';
 import PageTitle from './../components/PageTitle';
 import AppHeader from './../components/AppHeader';
 import AppContent from './../components/AppContent';
@@ -14,6 +15,14 @@ export default function App() {
 					<AppContent />
 				</div>
 			</div>
+			<Toaster
+				position='bottom-right'
+				toastOptions={{
+					style: {
+						fontSize: '1.5rem',
+					},
+				}}
+			/>
 		</>
 	);
 }

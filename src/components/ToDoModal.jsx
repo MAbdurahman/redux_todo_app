@@ -3,6 +3,8 @@ import { v4 as uuid } from 'uuid';
 import { MdOutlineClose } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../redux/slices/todoSlice';
+import { AnimatePresence, motion } from 'framer-motion';
+import toast from 'react-hot-toast';
 import styles from './../styles/modules/modal.module.scss';
 import Button from './Button';
 
@@ -15,17 +17,26 @@ export default function ToDoModal({ type, modalOpen, setModalOpen, todo }) {
 	//**************** functions ****************//
 	const handleSubmit = e => {
 		e.preventDefault();
-		if (title && status) {
-			dispatch(
-				addTodo({
-					id: uuid(),
-					title,
-					status,
-					time: new Date().toLocaleString(),
-				})
-			);
+		if (title === '') {
+			toast.error('A Task Title Is Required!');
+			return;
 		}
-		console.log('todoModal handleSubmit - ',{title, status})
+		if (title && status) {
+			if (type === 'add') {
+				dispatch(
+					addTodo({
+						id: uuid(),
+						title,
+						status,
+						time: new Date().toLocaleString(),
+					})
+				);
+				toast.success('Successfully Added New Task!');
+			}
+
+			setModalOpen(false);
+		}
+		
 	}
 	return (
 		<>

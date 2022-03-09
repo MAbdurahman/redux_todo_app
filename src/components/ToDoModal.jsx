@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { MdOutlineClose } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
+import { addTodo } from '../redux/slices/todoSlice';
 import styles from './../styles/modules/modal.module.scss';
 import Button from './Button';
 
@@ -8,11 +10,22 @@ export default function ToDoModal({ type, modalOpen, setModalOpen, todo }) {
 	//**************** variables ****************//
 	const [title, setTitle] = useState('');
 	const [status, setStatus] = useState('incomplete');
+	const dispatch = useDispatch;
 
 	//**************** functions ****************//
 	const handleSubmit = e => {
 		e.preventDefault();
-		console.log('todalModal handleSubmit - ',{title, status})
+		if (title && status) {
+			dispatch(
+				addTodo({
+					id: uuid(),
+					title,
+					status,
+					time: new Date().toLocaleString(),
+				})
+			);
+		}
+		console.log('todoModal handleSubmit - ',{title, status})
 	}
 	return (
 		<>

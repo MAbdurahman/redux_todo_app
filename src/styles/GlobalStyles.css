@@ -20,7 +20,17 @@
 }
 html {
 	font-size: 10px;
+	font-size: 62.5%;
 }
+/* Smartphones */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+	html {
+		font-size: 50%;
+	}
+}
+
 body {
 	font-family: 'Poppins', sans-serif;
 	width: 100%;

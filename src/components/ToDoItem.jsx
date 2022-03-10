@@ -10,6 +10,14 @@ import { getClasses } from './../utils/getClasses';
 import ToDoModal from './ToDoModal';
 import CheckButton from './CheckButton';
 
+const child = {
+	hidden: { y: 20, opacity: 0 },
+	visible: {
+		y: 0,
+		opacity: 1,
+	},
+};
+
 export default function ToDoItem({ todo }) {
 	//**************** variables ****************//
 	const dispatch = useDispatch();
@@ -30,6 +38,7 @@ export default function ToDoItem({ todo }) {
 		dispatch(
 			updateTodo({ ...todo, status: checked ? 'incomplete' : 'complete' })
 		);
+		toast.success('Successfully Updated ToDo Item!');
 	};
 
 	const handleDelete = () => {
@@ -41,7 +50,7 @@ export default function ToDoItem({ todo }) {
 	};
 	return (
 		<>
-			<div className={styles.item}>
+			<motion.div className={styles.item} variants={child} >
 				<div className={styles.todoDetails}>
 					<CheckButton checked={checked} handleCheck={handleCheck} />
 					<div className={styles.texts}>
@@ -79,7 +88,7 @@ export default function ToDoItem({ todo }) {
 						<MdDelete />
 					</div>
 				</div>
-			</div>
+			</motion.div>
 			<ToDoModal
 				type='update'
 				modalOpen={updateModalOpen}

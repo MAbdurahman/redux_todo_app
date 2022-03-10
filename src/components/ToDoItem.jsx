@@ -4,10 +4,11 @@ import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
-import { deleteTodo } from './../redux/slices/todoSlice';
+import { deleteTodo, updateTodo } from './../redux/slices/todoSlice';
 import styles from './../styles/modules/todoItem.module.scss';
 import { getClasses } from './../utils/getClasses';
 import ToDoModal from './ToDoModal';
+import CheckButton from './CheckButton';
 
 export default function ToDoItem({ todo }) {
 	//**************** variables ****************//
@@ -17,11 +18,18 @@ export default function ToDoItem({ todo }) {
 
 	//**************** functions ****************//
 	useEffect(() => {
-		console.log('todo Item');
-	}, []);
+		if (todo.status === 'complete') {
+			setChecked(true);
+		} else {
+			setChecked(false);
+		}
+	}, [todo.status]);
 
-	const handleChecked = () => {
-		console.log('handleChecked');
+	const handleCheck = () => {
+		setChecked(!checked);
+		dispatch(
+			updateTodo({ ...todo, status: checked ? 'incomplete' : 'complete' })
+		);
 	};
 
 	const handleDelete = () => {
@@ -35,7 +43,7 @@ export default function ToDoItem({ todo }) {
 		<>
 			<div className={styles.item}>
 				<div className={styles.todoDetails}>
-					[ ]
+					<CheckButton checked={checked} handleCheck={handleCheck} />
 					<div className={styles.texts}>
 						<p
 							className={getClasses([

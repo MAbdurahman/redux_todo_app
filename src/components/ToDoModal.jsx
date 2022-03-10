@@ -45,9 +45,9 @@ export default function ToDoModal({ type, modalOpen, setModalOpen, todo }) {
 			if (type === 'update') {
 				if (todo.title !== title || todo.status !== status) {
 					dispatch(updateTodo({ ...todo, title, status }));
-					toast.success('Task Updated successfully');
+					toast.success('Successfully Updated Task!');
 				} else {
-					toast.error('Click Cancel - No Update Performed!');
+					toast.error('Click Cancel - Nothing Updated!');
 					return;
 				}
 			}

@@ -20,9 +20,11 @@
 		width: 150px;
 		cursor: pointer;
 	}
+	
 }
 .button--primary {
 	background-color: var(--primaryPurple);
+	background-color: var(--primaryBlack);
 	color: var(--white);
 }
 .button--secondary {

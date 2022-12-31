@@ -106,7 +106,7 @@ export default function ToDoModal({ type, modalOpen, setModalOpen, todo }) {
 						</motion.div>
 						<form className={styles.form} onSubmit={e => handleSubmit(e)}>
 							<h1 className={styles.formTitle}>
-								{type === 'add' ? 'Add' : 'Update'} TODO
+								{type === 'add' ? 'Add' : 'Update'} ToDo
 							</h1>
 							<label htmlFor='title'>
 								Title

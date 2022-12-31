@@ -9,14 +9,14 @@ export default function App() {
 	return (
 		<>
 			<div className='container'>
-				<PageTitle>ToDo List</PageTitle>
+				<PageTitle>ToDo App</PageTitle>
 				<div className={styles.app__wrapper}>
 					<AppHeader />
 					<AppContent />
 				</div>
 			</div>
 			<Toaster
-				position='bottom-right'
+				position='bottom-center'
 				toastOptions={{
 					style: {
 						fontSize: '1.5rem',
